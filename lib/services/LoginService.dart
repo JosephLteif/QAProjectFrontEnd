@@ -21,7 +21,6 @@ Login(String email, String password, BuildContext context) async {
       "Password": password,
     });
     if (result.statusCode == 200) {
-      var resultData = result.data;
       prefs.setBool('IsLoggedIn', true);
       return true;
     } else {

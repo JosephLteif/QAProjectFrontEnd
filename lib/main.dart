@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qa/utils/settings_prefs.dart';
 import 'package:qa/views/screens/login.dart';
+import 'package:qa/views/screens/LandingPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
 //    FirebaseMessaging _fcm = FirebaseMessaging.instance;
 //    PushNotificationService(_fcm).initialise(context);
     return const MaterialApp(
-      home: SignIn(),
+      home: LandingPage(),
     );
   }
 }
