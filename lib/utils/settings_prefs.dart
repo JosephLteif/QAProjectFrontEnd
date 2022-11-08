@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qa/services/storage_manager.dart';
+import 'package:qa/utils/storage_manager.dart';
 
 import 'material_color.dart';
 
@@ -11,16 +11,16 @@ class SettingsNotifier extends ChangeNotifier{
     backgroundColor: const Color(0xFF212121),
     dividerColor: Colors.black12,
     buttonTheme: const ButtonThemeData(
-      buttonColor: Colors.deepPurple,     //  <-- dark color
+      buttonColor: Colors.deepPurple,     
       textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         backgroundColor: Colors.deepPurple,
-        foregroundColor: Colors.white, //  <-- this auto selects the right color
-
+        foregroundColor: Colors.white, 
+        fixedSize: const Size.fromWidth(100)
       )
-    )
+    ),
   );
 
   final lightTheme = ThemeData(
@@ -31,13 +31,15 @@ class SettingsNotifier extends ChangeNotifier{
     backgroundColor: const Color.fromARGB(235, 210, 208, 208),
     dividerColor: Colors.white54,
      buttonTheme: const ButtonThemeData(
-      buttonColor: Colors.deepPurple,     //  <-- dark color
+      buttonColor: Colors.deepPurple,     
       textTheme: ButtonTextTheme.primary, //  <-- this auto selects the right color
     ),
     textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
       backgroundColor: Colors.deepPurple,
-      foregroundColor: Colors.white, //  <-- this auto selects the right color
+      foregroundColor: Colors.white,
+      fixedSize: const Size.fromWidth(100)
+
     ))
   );
   ThemeData _themeData = ThemeData();
