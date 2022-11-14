@@ -58,7 +58,8 @@ dev_dependencies:
   flutter_launcher_icons: "^0.10.0"
   test: ^1.21.4
   fluttertoast: ^8.1.1
-
+  input_history_text_field: ^0.2.0
+  
 flutter_icons:
   android: "launcher_icon"
   ios: true

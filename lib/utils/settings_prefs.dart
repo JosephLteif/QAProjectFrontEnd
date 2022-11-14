@@ -48,11 +48,11 @@ SettingsNotifier() {
     StorageManager.readData('themeMode').then((value) {
       var themeMode = value ?? 'light';
       if (themeMode == 'light') {
-        _themeData = lightTheme;
+        _themeData = darkTheme;
         StorageManager.saveData('themeMode', 'light');
       } else {
         print('setting dark theme');
-        _themeData = darkTheme;
+        _themeData = darkTheme ;
       }
       notifyListeners();
     });

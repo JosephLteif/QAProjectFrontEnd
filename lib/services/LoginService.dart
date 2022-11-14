@@ -24,7 +24,7 @@ Login(String email, String password) async {
       return false;
     }
   } catch (e) {
-    throw e;
+    return false;
   }
 }
 
