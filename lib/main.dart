@@ -5,6 +5,7 @@ import 'package:qa/utils/settings_prefs.dart';
 import 'package:qa/views/screens/HomePage.dart';
 import 'package:qa/views/screens/login.dart';
 import 'package:qa/views/screens/LandingPage.dart';
+import 'package:qa/views/screens/widgets/NavBar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:qa/services/LoginService.dart';
 import 'package:qa/views/screens/HomePage.dart';
+import 'package:qa/views/screens/widgets/NavBar.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -68,6 +69,17 @@ class _SignIn extends State<SignIn> {
                 child: IntrinsicHeight(
                           child: Column(
                         children: [
+                          // Container(
+                          //     alignment: Alignment.topCenter,
+                          //     margin: const EdgeInsets.only(
+                          //         top: 150, right: 30, left: 30),
+                          //     // ignore: prefer_const_constructors
+                          //     child: Image(
+                          //       image: const AssetImage("assets/images/logo.png"),
+                          //       height: 90,
+                          //       width: 90,
+                          //     )                           
+                          // ),
                           Container(
                               alignment: Alignment.topCenter,
                               margin: const EdgeInsets.only(
@@ -145,15 +157,15 @@ class _SignIn extends State<SignIn> {
                                   return;
                                 }
                                 FocusScope.of(context).unfocus();
-                              
                                 setState(() {});
                                 try {
                                   bool response = await Login(
                                       emailController.text.toString(),
                                       passwordController.text.toString());
                                       if(response){
+                                        // ignore: use_build_context_synchronously
                                         Navigator.push(context,MaterialPageRoute(
-                                        builder: (context) => HomePage()));
+                                        builder: (context) => const NavBar()));
                                       }
                                       else{
                                         Handling().FailedToast();

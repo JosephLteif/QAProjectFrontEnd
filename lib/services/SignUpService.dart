@@ -21,8 +21,9 @@ Register(String email, String password,String name) async {
       prefs.setBool('IsLoggedIn', true);
       return true;
     } else {
+      return false;
     }
   } catch (e) {
-    throw e;
+    return false;
   }
 }
