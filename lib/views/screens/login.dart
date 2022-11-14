@@ -1,16 +1,26 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:qa/utils/handling.dart';
 import 'package:qa/utils/settings_prefs.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:qa/services/LoginService.dart';
+import 'package:qa/views/screens/HomePage.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
   @override
   State<SignIn> createState() => _SignIn();
+
+   Widget wrapWithMaterial() => MaterialApp(
+    home: ListenableProvider<SettingsNotifier>(
+      create: (_) => SettingsNotifier(),
+      child: Scaffold(
+        body: this,
+      ),
+    ),
+  );
 }
 
 class _SignIn extends State<SignIn> {
@@ -22,15 +32,14 @@ class _SignIn extends State<SignIn> {
   String errorMessage = '';
 
   bool _obscureText = true;
-  Icon firstIcon = const Icon(Icons.visibility);
-  Icon secondIcon = const Icon(Icons.visibility_off);
+  Icon firstIcon = const Icon(Icons.visibility,color: Colors.grey,);
+  Icon secondIcon = const Icon(Icons.visibility_off, color: Colors.grey);
 
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
     });
   }
-
   @override
   Widget build(BuildContext context) {
      return Consumer<SettingsNotifier>(
@@ -38,6 +47,7 @@ class _SignIn extends State<SignIn> {
           theme: theme.getTheme(),
           home: Scaffold(
             appBar: AppBar(
+              title: Text("Login"),
                  leading: InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -79,7 +89,7 @@ class _SignIn extends State<SignIn> {
                               )),
                           Container(
                             alignment: Alignment.topCenter,
-                            margin: const EdgeInsets.all(30),
+                            margin: const EdgeInsets.only(top:30,right:30,left:30),
                             child: TextFormField(
                               controller: passwordController,
                               decoration: InputDecoration(
@@ -107,6 +117,23 @@ class _SignIn extends State<SignIn> {
                                 fontWeight: FontWeight.normal),
                           ),
                           Container(
+                             alignment: Alignment.topLeft,
+                              margin: const EdgeInsets.only(right: 30, left: 30),
+                            child: RichText(
+                              text: TextSpan(
+                                style: const TextStyle(color: Colors.blue, fontSize: 12.0,fontStyle: FontStyle.italic),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                      text: 'Forgot password',
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () {
+                                          print('Terms of Service"');
+                                        }),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
                             margin: const EdgeInsets.only(bottom: 10),
                             child: TextButton(
                               style: theme.getTheme().textButtonTheme.style,
@@ -120,19 +147,21 @@ class _SignIn extends State<SignIn> {
                                 try {
                                   bool response = await Login(
                                       emailController.text.toString(),
-                                      passwordController.text.toString(),
-                                      this.context);
+                                      passwordController.text.toString());
                                       if(response){
-                                        
+                                        Navigator.push(context,MaterialPageRoute(
+                                        builder: (context) => HomePage()));
+                                      }
+                                      else{
+                                        Handling().FailedToast();
                                       }
                                 } catch (e) {
-                                  throw e;
+                                  Handling().FailedToast();
                                 } finally {
                                   emailController.text = "";
                                   passwordController.text = "";
                                 }
                                 setState(() {});
-                              
                             },
                               child: const Text(
                                 "Login",
@@ -140,46 +169,14 @@ class _SignIn extends State<SignIn> {
                               ),
                             ),
                           ),
-                          RichText(
-                            text: TextSpan(
-                              children: <TextSpan>[
-                                TextSpan(text: 'By clicking Sign Up, you agree to our '),
-                                TextSpan(
-                                    text: 'Terms of Service',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        print('Terms of Service"');
-                                      }),
-                                TextSpan(text: ' and that you have read our '),
-                                TextSpan(
-                                    text: 'Privacy Policy',
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        print('Privacy Policy"');
-                                      }),
-                              ],
-                            ),
-                          ),
-                          const Text(
-                            "-OR-",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: SignInButton(
-                                Buttons.Google,
-                                text: "Login with Google",
-                                onPressed: () async {
-                                },
-                              ))
+
                         ],
                       )),
               ),
             ),
-          
         )),
         )));
-  }
+      }
     }
 
   String? validateEmail(String? formEmail) {
@@ -199,3 +196,5 @@ class _SignIn extends State<SignIn> {
     }
     return null;
   }
+
+
