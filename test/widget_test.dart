@@ -7,13 +7,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:provider/provider.dart';
 
 import 'package:qa/main.dart';
+import 'package:qa/utils/settings_prefs.dart';
+import 'package:qa/views/screens/login.dart';
+
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+
+  // WidgetsFlutterBinding.ensureInitialized();
+
+  // ChangeNotifierProvider<SettingsNotifier>(
+  //   create: (_) => SettingsNotifier(),
+  //   child: const MyApp(),
+  // );
+   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const SignIn().wrapWithMaterial());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -1,9 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:qa/services/LoginService.dart';
+import 'package:qa/utils/handling.dart';
 import 'package:qa/utils/settings_prefs.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:qa/services/SignUpService.dart';
+import 'package:qa/views/screens/login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -16,7 +19,6 @@ class _SignUp extends State<SignUp> {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
@@ -38,7 +40,7 @@ class _SignUp extends State<SignUp> {
           theme: theme.getTheme(),
           home: Scaffold(
             appBar: AppBar(
-              title: Text("SignUp"),
+              title:const Text("SignUp"),
                  leading: InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -98,25 +100,6 @@ class _SignUp extends State<SignUp> {
                             ),
                           )),
                           Container(
-                          alignment: Alignment.topCenter,
-                          margin: const EdgeInsets.only(
-                              top: 20, right: 30, left: 30),
-                          child: TextFormField(
-                            validator: validatePhone,
-                            controller: phoneController,
-                            cursorHeight: 20,
-                            autofocus: false,
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.phone, color: Colors.grey),
-                              border: OutlineInputBorder(),
-                              labelText: 'Phone Number',
-                              labelStyle: TextStyle(color: Colors.grey),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(width: 1, color: Colors.grey),
-                              ),
-                            ),
-                          )),
-                          Container(
                             alignment: Alignment.topCenter,
                             margin: const EdgeInsets.only(top:20,right:30,left:30),
                             child: TextFormField(
@@ -160,17 +143,16 @@ class _SignUp extends State<SignUp> {
                                   bool response = await Register(
                                       emailController.text.toString(),
                                       passwordController.text.toString(),
-                                      nameController.text.toString(),
-                                      phoneController.text.toString(),
-                                      this.context);
+                                      nameController.text.toString());
                                       if(response){
-                                        
+                                        Navigator.push(context,MaterialPageRoute(
+                                        builder: (context) => SignIn()));
+                                      }
+                                      else{
+                                        Handling().failSignup();
                                       }
                                 } catch (e) {
-                                  throw e;
-                                } finally {
-                                  emailController.text = "";
-                                  passwordController.text = "";
+                                  Handling().failSignup();
                                 }
                                 setState(() {});
                             },
@@ -180,19 +162,6 @@ class _SignUp extends State<SignUp> {
                               ),
                             ),
                           ),
-                    
-                          const Text(
-                            "-OR-",
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          Container(
-                              margin: const EdgeInsets.only(top: 10),
-                              child: SignInButton(
-                                Buttons.Google,
-                                text: "Sign up with Google",
-                                onPressed: () async {
-                                },
-                              ))
                         ],
                       )),
               ),
@@ -220,21 +189,13 @@ class _SignUp extends State<SignUp> {
     }
     return null;
   }
-  
   String? validateName(String? formName) {
     if (formName == null || formName.isEmpty) {
-      return 'Password is required.';
+      return 'Name is required.';
     }
+    String pattern = '^[a-zA-Z0-9_ ]*';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(formName)) return 'Name can only include words';
     return null;
   }
-  String? validatePhone(String? value) {
-    String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-    RegExp regExp = new RegExp(patttern);
-    if (value!.length == 0) {
-      return 'Please enter mobile number';
-    }
-    else if (!regExp.hasMatch(value)) {
-      return 'Please enter valid mobile number';
-    }
-    return null;
-  } 
+  

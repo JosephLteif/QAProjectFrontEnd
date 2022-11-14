@@ -34,7 +34,11 @@ class _MyLandingPageState extends State<MyLandingPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+     return Consumer<SettingsNotifier>(
+        builder: (context, theme, _) => MaterialApp(
+          theme: theme.getTheme(),
+          home: Scaffold(
+        body:  Scaffold(
         body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -47,7 +51,6 @@ class _MyLandingPageState extends State<MyLandingPage> {
               "TeachMe",
               style: TextStyle(
                   fontSize: 30,
-                  color: Colors.white,
                   fontWeight: FontWeight.w600),
             ),
           ),
@@ -60,7 +63,7 @@ class _MyLandingPageState extends State<MyLandingPage> {
               children: [
                 Container(
                     margin: const EdgeInsets.only(top: 90),
-                    height: 50,
+                    height: 40,
                     width: 220,
                     child: TextButton(
                       onPressed: () async {
@@ -107,6 +110,6 @@ class _MyLandingPageState extends State<MyLandingPage> {
           )
         ],
       ),
-    ));
+    )))));
   }
 }
