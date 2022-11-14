@@ -73,6 +73,7 @@ class _SignIn extends State<SignIn> {
                               margin: const EdgeInsets.only(
                                   top: 150, right: 30, left: 30),
                               child: TextFormField(
+                                key: const Key("Email"),
                                 validator: validateEmail,
                                 controller: emailController,
                                 cursorHeight: 20,
@@ -91,6 +92,7 @@ class _SignIn extends State<SignIn> {
                             alignment: Alignment.topCenter,
                             margin: const EdgeInsets.only(top:30,right:30,left:30),
                             child: TextFormField(
+                              key: const Key("Password"),
                               controller: passwordController,
                               decoration: InputDecoration(
                                   labelText: 'Password',
@@ -136,6 +138,7 @@ class _SignIn extends State<SignIn> {
                           Container(
                             margin: const EdgeInsets.only(bottom: 10),
                             child: TextButton(
+                              key: const Key("Loginbtn"),
                               style: theme.getTheme().textButtonTheme.style,
                               onPressed: () async {
                              if (!_key.currentState!.validate()) {

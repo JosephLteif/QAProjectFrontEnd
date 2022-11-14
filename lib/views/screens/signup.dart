@@ -66,6 +66,7 @@ class _SignUp extends State<SignUp> {
                               margin: const EdgeInsets.only(
                                   top: 100, right: 30, left: 30),
                               child: TextFormField(
+                                key: const Key("name"),
                                 validator: validateName,
                                 controller: nameController,
                                 cursorHeight: 20,
@@ -85,6 +86,7 @@ class _SignUp extends State<SignUp> {
                           margin: const EdgeInsets.only(
                               top: 20, right: 30, left: 30),
                           child: TextFormField(
+                            key: const Key("email"),
                             validator: validateEmail,
                             controller: emailController,
                             cursorHeight: 20,
@@ -103,6 +105,7 @@ class _SignUp extends State<SignUp> {
                             alignment: Alignment.topCenter,
                             margin: const EdgeInsets.only(top:20,right:30,left:30),
                             child: TextFormField(
+                              key: const Key("password"),
                               controller: passwordController,
                               decoration: InputDecoration(
                                   labelText: 'Password',
@@ -131,6 +134,7 @@ class _SignUp extends State<SignUp> {
                           Container(
                             margin: const EdgeInsets.only(bottom: 10),
                             child: TextButton(
+                              key: const Key("Signupbtn"),
                               style: theme.getTheme().textButtonTheme.style,
                               onPressed: () async {
                              if (!_key.currentState!.validate()) {
