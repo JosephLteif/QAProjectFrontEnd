@@ -19,7 +19,7 @@ class _NavBarState extends State<NavBar> {
   void initState() {
     super.initState();
     // database.getUser("FQ74oZhuNYRI2H9HMf3hLC98x5a2");
-    _pageOptions = [const HomePage(),const SignIn(),const SignUp()];
+    _pageOptions = [const HomePage(), const SignIn(), SignUp()];
   }
 
   void _onItemTapped(int index) {
@@ -32,31 +32,31 @@ class _NavBarState extends State<NavBar> {
   Widget build(BuildContext context) {
     return Consumer<SettingsNotifier>(
         builder: (context, theme, _) => MaterialApp(
-          theme: theme.getTheme(),
-          home:Scaffold(
-          body: _pageOptions[_selectedIndex],
-          bottomNavigationBar: BottomNavigationBar(
-            fixedColor: Colors.deepPurple,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                // backgroundColor: Colors.purple,
-                icon: Icon(
-                  Icons.search,
-                ),
-                label: 'Discover',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.book),
-                label: 'My Courses ',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Profile',
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            onTap: _onItemTapped,
-          )),
-    ));
+              theme: theme.getTheme(),
+              home: Scaffold(
+                  body: _pageOptions[_selectedIndex],
+                  bottomNavigationBar: BottomNavigationBar(
+                    fixedColor: Colors.deepPurple,
+                    items: const <BottomNavigationBarItem>[
+                      BottomNavigationBarItem(
+                        // backgroundColor: Colors.purple,
+                        icon: Icon(
+                          Icons.search,
+                        ),
+                        label: 'Discover',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.book),
+                        label: 'My Courses ',
+                      ),
+                      BottomNavigationBarItem(
+                        icon: Icon(Icons.person),
+                        label: 'Profile',
+                      ),
+                    ],
+                    currentIndex: _selectedIndex,
+                    onTap: _onItemTapped,
+                  )),
+            ));
   }
 }

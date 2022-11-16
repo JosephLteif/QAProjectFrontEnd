@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qa/utils/settings_prefs.dart';
@@ -24,8 +23,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 //    FirebaseMessaging _fcm = FirebaseMessaging.instance;
 //    PushNotificationService(_fcm).initialise(context);
-    return const MaterialApp(
-      home: LandingPage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SettingsNotifier>(
+            create: (context) => SettingsNotifier()),
+      ],
+      child: Consumer<SettingsNotifier>(
+        builder: (context, value, child) => MaterialApp(
+          theme: value.getTheme(),
+          home: LandingPage(),
+        ),
+      ),
     );
   }
 }
