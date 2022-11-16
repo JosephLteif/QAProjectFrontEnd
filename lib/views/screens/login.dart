@@ -58,10 +58,13 @@ class _SignIn extends State<SignIn> {
                 child: Column(
                   children: [
                     const Spacer(),
-                    const Image(
-                      image: const AssetImage("assets/images/logo.png"),
-                      height: 200,
-                      width: 200,
+                    const Hero(
+                      tag: 'PlatformName',
+                      child: Image(
+                        image: AssetImage("assets/images/logo.png"),
+                        height: 200,
+                        width: 200,
+                      ),
                     ),
                     TextFormField(
                       key: const Key("Email"),

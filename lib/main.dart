@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<SettingsNotifier>(
         builder: (context, value, child) => MaterialApp(
           theme: value.getTheme(),
-          home: LandingPage(),
+          home: const MyLandingPage(title: 'TeachMe'),
         ),
       ),
     );

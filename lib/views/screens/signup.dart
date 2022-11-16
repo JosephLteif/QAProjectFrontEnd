@@ -9,142 +9,142 @@ import 'package:qa/services/SignUpService.dart';
 import 'package:qa/views/screens/login.dart';
 
 class SignUp extends StatefulWidget {
-  SignUp();
-
   @override
-  State<SignUp> createState() => _SignUp();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignUp extends State<SignUp> {
+class _SignUpState extends State<SignUp> {
   TextEditingController emailController = TextEditingController();
+
   TextEditingController nameController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  String errorMessage = '';
-
-  bool _obscureText = true;
-  Icon firstIcon = const Icon(
-    Icons.visibility,
-    color: Colors.grey,
-  );
-  Icon secondIcon = const Icon(Icons.visibility_off, color: Colors.grey);
-
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
+  int _index = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SettingsNotifier>(
-        builder: (context, theme, _) => MaterialApp(
-            theme: theme.getTheme(),
-            home: Scaffold(
-              appBar: AppBar(
-                title: const Text("SignUp"),
-                leading: InkWell(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Icon(
-                    Icons.arrow_back_ios,
-                    // color: Colors.black54,
-                  ),
-                ),
-              ),
-              body: GestureDetector(
-                  child: Form(
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          title: Text("Register"),
+          centerTitle: true,
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Form(
                 key: _key,
-                child: Scaffold(
-                  body: SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    child: IntrinsicHeight(
-                        child: Column(
-                      children: [
-                        Container(
-                            alignment: Alignment.topCenter,
-                            margin: const EdgeInsets.only(
-                                top: 100, right: 30, left: 30),
-                            child: TextFormField(
-                              key: const Key("name"),
-                              validator: validateName,
-                              controller: nameController,
-                              cursorHeight: 20,
-                              autofocus: false,
-                              decoration: const InputDecoration(
-                                prefixIcon:
-                                    Icon(Icons.person, color: Colors.grey),
-                                border: OutlineInputBorder(),
-                                labelText: 'Name',
-                                labelStyle: TextStyle(color: Colors.grey),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.grey),
-                                ),
-                              ),
-                            )),
-                        Container(
-                            alignment: Alignment.topCenter,
-                            margin: const EdgeInsets.only(
-                                top: 20, right: 30, left: 30),
-                            child: TextFormField(
-                              key: const Key("email"),
-                              validator: validateEmail,
-                              controller: emailController,
-                              cursorHeight: 20,
-                              autofocus: false,
-                              decoration: const InputDecoration(
-                                prefixIcon:
-                                    Icon(Icons.email, color: Colors.grey),
-                                border: OutlineInputBorder(),
-                                labelText: 'Email',
-                                labelStyle: TextStyle(color: Colors.grey),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.grey),
-                                ),
-                              ),
-                            )),
-                        Container(
-                          alignment: Alignment.topCenter,
-                          margin: const EdgeInsets.only(
-                              top: 20, right: 30, left: 30),
-                          child: TextFormField(
-                            key: const Key("password"),
-                            controller: passwordController,
-                            decoration: InputDecoration(
-                                labelText: 'Password',
-                                border: const OutlineInputBorder(),
-                                prefixIcon:
-                                    const Icon(Icons.lock, color: Colors.grey),
-                                labelStyle: const TextStyle(color: Colors.grey),
-                                focusedBorder: const OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(width: 1, color: Colors.grey),
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: _obscureText ? firstIcon : secondIcon,
-                                  onPressed: () {
-                                    _toggle();
-                                  },
-                                )),
-                            validator: validatePassword,
-                            obscureText: _obscureText,
+                child: Stepper(
+                  currentStep: _index,
+                  onStepCancel: () {
+                    if (_index > 0) {
+                      setState(() {
+                        _index -= 1;
+                      });
+                    }
+                  },
+                  onStepContinue: () {
+                    if (_index <= 0) {
+                      setState(() {
+                        _index += 1;
+                      });
+                    }
+                  },
+                  onStepTapped: (int index) {
+                    setState(() {
+                      _index = index;
+                    });
+                  },
+                  steps: [
+                    Step(
+                      state: _index! >= 0
+                          ? (_index! == 0
+                              ? StepState.editing
+                              : StepState.complete)
+                          : StepState.indexed,
+                      title: const Text("Step 1"),
+                      content: TextFormField(
+                        key: const Key("Name"),
+                        validator: validateName,
+                        controller: nameController,
+                        cursorHeight: 20,
+                        autofocus: false,
+                        decoration: const InputDecoration(
+                          filled: true,
+                          fillColor: Color(0xFF343434),
+                          prefixIcon: Icon(Icons.person, color: Colors.grey),
+                          border: InputBorder.none,
+                          labelText: 'Name',
+                          labelStyle: TextStyle(color: Colors.grey),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(width: 1, color: Colors.grey),
                           ),
                         ),
-                        Text(
-                          errorMessage,
-                          style: const TextStyle(
-                              color: Colors.redAccent,
-                              fontWeight: FontWeight.normal),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: TextButton(
+                      ),
+                    ),
+                    Step(
+                      state: _index! >= 1
+                          ? (_index! == 1
+                              ? StepState.editing
+                              : StepState.complete)
+                          : StepState.indexed,
+                      title: const Text("Step 2"),
+                      content: Column(
+                        children: [
+                          TextFormField(
+                            key: const Key("Email"),
+                            validator: validateEmail,
+                            controller: emailController,
+                            cursorHeight: 20,
+                            autofocus: false,
+                            decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Color(0xFF343434),
+                              prefixIcon: Icon(Icons.email, color: Colors.grey),
+                              border: InputBorder.none,
+                              labelText: 'Email',
+                              labelStyle: TextStyle(color: Colors.grey),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            key: const Key("Password"),
+                            validator: validatePassword,
+                            controller: passwordController,
+                            cursorHeight: 20,
+                            autofocus: false,
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Color(0xFF343434),
+                              prefixIcon:
+                                  Icon(Icons.password, color: Colors.grey),
+                              border: InputBorder.none,
+                              labelText: 'Password',
+                              labelStyle: TextStyle(color: Colors.grey),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(width: 1, color: Colors.grey),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextButton(
                             key: const Key("Signupbtn"),
-                            style: theme.getTheme().textButtonTheme.style,
                             onPressed: () async {
                               if (!_key.currentState!.validate()) {
                                 return;
@@ -175,13 +175,15 @@ class _SignUp extends State<SignUp> {
                               style: TextStyle(fontSize: 16),
                             ),
                           ),
-                        ),
-                      ],
-                    )),
-                  ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              )),
-            )));
+              ),
+            ],
+          ),
+        ));
   }
 }
 
