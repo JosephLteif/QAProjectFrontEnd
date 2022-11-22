@@ -1,28 +1,22 @@
-import 'package:flutter/gestures.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:qa/utils/handling.dart';
 import 'package:qa/utils/settings_prefs.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:qa/services/LoginService.dart';
-import 'package:qa/views/screens/HomePage.dart';
 import 'package:qa/views/screens/signup.dart';
 import 'package:qa/views/screens/widgets/NavBar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Providers/UserProvider.dart';
+import '../../models/User.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
 
   @override
   State<SignIn> createState() => _SignIn();
-
-  Widget wrapWithMaterial() => MaterialApp(
-        home: ListenableProvider<SettingsNotifier>(
-          create: (_) => SettingsNotifier(),
-          child: Scaffold(
-            body: this,
-          ),
-        ),
-      );
 }
 
 class _SignIn extends State<SignIn> {
@@ -47,8 +41,8 @@ class _SignIn extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SettingsNotifier>(
-      builder: (context, value, _) => Scaffold(
+    return Consumer2<SettingsNotifier, UserProvider>(
+      builder: (context, value, userProvider, _) => Scaffold(
         backgroundColor: Colors.black,
         body: Form(
           key: _key,
@@ -139,18 +133,14 @@ class _SignIn extends State<SignIn> {
                         FocusScope.of(context).unfocus();
                         setState(() {});
                         try {
-                          bool response = await Login(
+                          User response = await Login(
                               emailController.text.toString(),
                               passwordController.text.toString());
-                          if (response) {
-                            // ignore: use_build_context_synchronously
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const NavBar()));
-                          } else {
-                            Handling().FailedToast();
-                          }
+                          userProvider.setUser(response);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const NavBar()));
                         } catch (e) {
                           Handling().FailedToast();
                         } finally {

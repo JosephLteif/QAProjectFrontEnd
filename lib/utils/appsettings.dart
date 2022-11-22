@@ -1,14 +1,10 @@
 // ignore_for_file: constant_identifier_names
 
 /*endpoints*/
-const LoginUrl="https://192.168.100.3:5003/api/FirebaseAuthentication/Login";
-const RegisterUrl="https://192.168.100.3:5003/api/FirebaseAuthentication/Register";
+const LoginUrl = "https://10.0.2.2:5001/api/FirebaseAuthentication/Login";
+const RegisterUrl = "https://10.0.2.2:5001/api/FirebaseAuthentication/Register";
 // const LoginUrl="https://jsonplaceholder.typicode.com/todos/1";
 // const RegisterUrl="https://jsonplaceholder.typicode.com/todos/1";
-
-
-
-
 
 /* font sizes*/
 const textSizeSmall = 12.0;
@@ -27,4 +23,3 @@ const spacing_standard_new = 16.0;
 const spacing_large = 24.0;
 const spacing_xlarge = 32.0;
 const spacing_xxLarge = 40.0;
-

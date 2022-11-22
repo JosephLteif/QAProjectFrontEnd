@@ -6,6 +6,8 @@ import 'package:qa/views/screens/login.dart';
 import 'package:qa/views/screens/LandingPage.dart';
 import 'package:qa/views/screens/widgets/NavBar.dart';
 
+import 'Providers/UserProvider.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<SettingsNotifier>(
             create: (context) => SettingsNotifier()),
+        ChangeNotifierProvider<UserProvider>(
+            create: (context) => UserProvider()),
       ],
       child: Consumer<SettingsNotifier>(
         builder: (context, value, child) => MaterialApp(

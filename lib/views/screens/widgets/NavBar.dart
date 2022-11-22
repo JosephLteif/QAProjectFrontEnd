@@ -5,6 +5,8 @@ import 'package:qa/views/screens/login.dart';
 import 'package:qa/views/screens/signup.dart';
 import 'package:provider/provider.dart';
 
+import '../Profile.dart';
+
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
 
@@ -14,12 +16,21 @@ class NavBar extends StatefulWidget {
 
 class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
-  late List _pageOptions = [];
+  List _pageOptions = [];
+  List<String> _pageNames = [];
+  List<Icon> _pageIcons = [];
   @override
   void initState() {
     super.initState();
-    // database.getUser("FQ74oZhuNYRI2H9HMf3hLC98x5a2");
-    _pageOptions = [const HomePage(), const SignIn(), SignUp()];
+    _pageOptions = [const HomePage(), const HomePage(), const Profile()];
+    _pageNames = ['Discover', 'My Courses', 'Profile'];
+    _pageIcons = [
+      const Icon(
+        Icons.home,
+      ),
+      const Icon(Icons.book),
+      const Icon(Icons.person)
+    ];
   }
 
   void _onItemTapped(int index) {
@@ -37,23 +48,13 @@ class _NavBarState extends State<NavBar> {
                   body: _pageOptions[_selectedIndex],
                   bottomNavigationBar: BottomNavigationBar(
                     fixedColor: Colors.deepPurple,
-                    items: const <BottomNavigationBarItem>[
-                      BottomNavigationBarItem(
+                    items: List.generate(_pageOptions.length, (index) {
+                      return BottomNavigationBarItem(
                         // backgroundColor: Colors.purple,
-                        icon: Icon(
-                          Icons.search,
-                        ),
-                        label: 'Discover',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.book),
-                        label: 'My Courses ',
-                      ),
-                      BottomNavigationBarItem(
-                        icon: Icon(Icons.person),
-                        label: 'Profile',
-                      ),
-                    ],
+                        icon: _pageIcons[index],
+                        label: _pageNames[index],
+                      );
+                    }),
                     currentIndex: _selectedIndex,
                     onTap: _onItemTapped,
                   )),
