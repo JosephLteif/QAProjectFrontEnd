@@ -4,6 +4,7 @@ import 'package:qa/utils/storage_manager.dart';
 import 'material_color.dart';
 
 class SettingsNotifier extends ChangeNotifier {
+  bool isDarkMode = false;
   final darkTheme = ThemeData(
     primarySwatch: Colors.grey,
     primaryColor: Colors.black,
@@ -46,21 +47,30 @@ class SettingsNotifier extends ChangeNotifier {
     StorageManager.readData('themeMode').then((value) {
       var themeMode = value ?? 'light';
       if (themeMode == 'light') {
-        _themeData = darkTheme;
+        _themeData = lightTheme;
+        isDarkMode = false;
         StorageManager.saveData('themeMode', 'light');
       } else {
         print('setting dark theme');
+        isDarkMode = true;
         _themeData = darkTheme;
+        StorageManager.saveData('themeMode', 'dark');
       }
       notifyListeners();
     });
   }
 
+  getThemeMode() {
+    return isDarkMode;
+  }
+
   ToggleTheme() {
-    if (_themeData == lightTheme) {
+    if (!isDarkMode) {
       _themeData = darkTheme;
+      isDarkMode = true;
     } else {
       _themeData = lightTheme;
+      isDarkMode = false;
     }
     notifyListeners();
   }

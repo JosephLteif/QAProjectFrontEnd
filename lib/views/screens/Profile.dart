@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qa/utils/settings_prefs.dart';
 
 import '../../Providers/UserProvider.dart';
 
@@ -8,8 +9,8 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserProvider>(
-      builder: (context, userProvider, child) => Scaffold(
+    return Consumer2<UserProvider, SettingsNotifier>(
+      builder: (context, userProvider, settingsProvider, child) => Scaffold(
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -71,24 +72,34 @@ class Profile extends StatelessWidget {
                 ),
                 Expanded(
                   // height: 50,
-                  child: ListView.builder(
-                    itemCount: 20,
+                  child: ListView(
                     shrinkWrap: true,
-                    itemBuilder: ((context, index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Option $index"),
-                              const Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Colors.deepPurple,
-                              ),
-                            ],
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Option 1"),
+                          const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: Colors.deepPurple,
                           ),
-                        )),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Dark Mode"),
+                          Switch(
+                            value: settingsProvider.getThemeMode(),
+                            onChanged: (value) {
+                              settingsProvider.ToggleTheme();
+                            },
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                )
+                ),
               ],
             ),
           ),

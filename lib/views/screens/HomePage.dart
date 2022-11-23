@@ -10,6 +10,7 @@ import 'package:qa/models/course.dart';
 import 'package:qa/utils/DataHelper.dart';
 import 'package:qa/utils/settings_prefs.dart';
 import 'package:qa/views/screens/widgets/Card.dart';
+import 'package:qa/views/screens/widgets/CardTile.dart';
 import 'package:qa/views/screens/widgets/SectionBar.dart';
 
 import 'ViewAllPage.dart';
@@ -100,6 +101,10 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ),
+                    const Divider(
+                      thickness: 1,
+                      color: Colors.deepPurple,
+                    ),
                     Column(
                       children: [
                         SectionBar(
@@ -124,47 +129,27 @@ class _HomePageState extends State<HomePage>
                                 );
                               }),
                         ),
+                        const Divider(
+                          thickness: 1,
+                          color: Colors.deepPurple,
+                        ),
                         SectionBar(
-                          title: "Free Courses",
+                          title: "Popular Courses",
                           redirectPage: ViewAllPage(
                             courses: courses,
-                            title: "Free Courses",
+                            title: "Popular Courses",
                           ),
                         ),
-                        Container(
-                          height: 220,
-                          width: MediaQuery.of(context).size.width,
-                          alignment: Alignment.topLeft,
-                          padding: const EdgeInsets.all(8),
+                        SizedBox(
+                          height: 75 * 5,
                           child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.vertical,
+                              physics: NeverScrollableScrollPhysics(),
                               padding: const EdgeInsets.all(8),
-                              itemCount: freeCourses.length,
+                              itemCount: 5,
                               itemBuilder: (BuildContext context, int index) {
-                                return CardWidget(
+                                return CardTile(
                                   course: freeCourses[index],
-                                );
-                              }),
-                        ),
-                        SectionBar(
-                          title: "Get Certified",
-                          redirectPage: ViewAllPage(
-                            courses: courses,
-                            title: "Get Certified",
-                          ),
-                        ),
-                        Container(
-                          height: 220,
-                          width: MediaQuery.of(context).size.width,
-                          alignment: Alignment.topLeft,
-                          padding: const EdgeInsets.all(8),
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              padding: const EdgeInsets.all(8),
-                              itemCount: courses.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return CardWidget(
-                                  course: courses[index],
                                 );
                               }),
                         ),
