@@ -10,6 +10,9 @@ import 'package:qa/models/course.dart';
 import 'package:qa/utils/DataHelper.dart';
 import 'package:qa/utils/settings_prefs.dart';
 import 'package:qa/views/screens/widgets/Card.dart';
+import 'package:qa/views/screens/widgets/SectionBar.dart';
+
+import 'ViewAllPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -99,38 +102,15 @@ class _HomePageState extends State<HomePage>
                     ),
                     Column(
                       children: [
-                        Container(
-                          alignment: Alignment.topLeft,
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Top Picks For You",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 22),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  style: const TextStyle(
-                                      color: Colors.blue,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.bold),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: 'View All',
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            print('Terms of Service"');
-                                          }),
-                                  ],
-                                ),
-                              ),
-                            ],
+                        SectionBar(
+                          title: "Top Picks For You",
+                          redirectPage: ViewAllPage(
+                            courses: courses,
+                            title: "Top Picks For You",
                           ),
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height / 3,
+                          height: 220,
                           width: MediaQuery.of(context).size.width,
                           alignment: Alignment.topLeft,
                           padding: const EdgeInsets.all(8),
@@ -144,41 +124,15 @@ class _HomePageState extends State<HomePage>
                                 );
                               }),
                         ),
-
-                        //Free courses
-                        Container(
-                          alignment: Alignment.topLeft,
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            // ignore: prefer_const_literals_to_create_immutables
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Free Courses",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 22),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  style: const TextStyle(
-                                      color: Colors.blue,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.bold),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: 'View All',
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            print('Terms of Service"');
-                                          }),
-                                  ],
-                                ),
-                              ),
-                            ],
+                        SectionBar(
+                          title: "Free Courses",
+                          redirectPage: ViewAllPage(
+                            courses: courses,
+                            title: "Free Courses",
                           ),
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height / 3,
+                          height: 220,
                           width: MediaQuery.of(context).size.width,
                           alignment: Alignment.topLeft,
                           padding: const EdgeInsets.all(8),
@@ -192,41 +146,15 @@ class _HomePageState extends State<HomePage>
                                 );
                               }),
                         ),
-
-                        //GetCertified
-                        Container(
-                          alignment: Alignment.topLeft,
-                          padding: const EdgeInsets.all(8),
-                          child: Row(
-                            // ignore: prefer_const_literals_to_create_immutables
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Get Certified",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 22),
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                  style: const TextStyle(
-                                      color: Colors.blue,
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.bold),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                        text: 'View All',
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            print('Terms of Service"');
-                                          }),
-                                  ],
-                                ),
-                              ),
-                            ],
+                        SectionBar(
+                          title: "Get Certified",
+                          redirectPage: ViewAllPage(
+                            courses: courses,
+                            title: "Get Certified",
                           ),
                         ),
                         Container(
-                          height: MediaQuery.of(context).size.height / 3,
+                          height: 220,
                           width: MediaQuery.of(context).size.width,
                           alignment: Alignment.topLeft,
                           padding: const EdgeInsets.all(8),

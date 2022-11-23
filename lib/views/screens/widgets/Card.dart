@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:qa/models/course.dart';
 import 'package:qa/utils/settings_prefs.dart';
 import 'package:provider/provider.dart';
+
 class CardWidget extends StatefulWidget {
   Course course;
   CardWidget({Key? key, required this.course}) : super(key: key);
@@ -12,57 +13,68 @@ class CardWidget extends StatefulWidget {
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  late Course course;
   @override
   Widget build(BuildContext context) {
-      return Container(
-        padding: EdgeInsets.only(right:8),
-        child: Card(
-          color:Colors.transparent,
-           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
+    return SizedBox(
+      height: 180,
+      width: 160,
+      child: Card(
+        margin: const EdgeInsets.symmetric(horizontal: 8.0),
+        color: const Color(0xFF343434),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10.0),
+                  topRight: Radius.circular(10.0)),
+              child: Image.network(
+                height: 108,
+                width: 180,
+                fit: BoxFit.fill,
+                widget.course.image!,
+              ),
             ),
-            elevation: 00,
-            child: SizedBox(
-              width: 150,
-              height: 200,
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                       ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.network(
-                              widget.course.image!,
-                          ),
-                      ),
-                         const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: Text(widget.course.name!,
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                          ), //Textstyle
-                        ),
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        child: widget.course.price==0? const Text("Free") :Text(widget.course.price!.toString(),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                          ), //Textstyle
-                        ),
-                      ), 
-                    ],
-                  ),
-                ), //Column
-              ), //Padding
+            const SizedBox(
+              height: 10,
             ),
-      ); //SizedBox
-}
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                widget.course.name!,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ), //Textstyle
+              ),
+            ),
+            const SizedBox(
+              height: 4,
+            ),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.arrow_right,
+                      color: Color(0xFFC0BDBD),
+                    ),
+                    Text(
+                      // widget.course.price!.toString(),
+                      "${widget.course.length.toString()} sessions - ${widget.course.price == 0 ? "Free" : widget.course.price!.toStringAsFixed(2) + "\$"}",
+                      style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                          color: Color(0xFFC0BDBD)), //Textstyle
+                    ),
+                  ],
+                )),
+          ],
+        ), //Column
+      ),
+    ); //SizedBox
+  }
 }
