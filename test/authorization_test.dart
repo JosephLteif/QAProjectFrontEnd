@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:qa/models/User.dart';
 
@@ -8,34 +9,28 @@ import 'package:shared_preferences/shared_preferences.dart';
 void main() {
   group('Login', () {
     test('User logged in successfully', () async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
       User loggedInUser = await Login("petertest@gmail.com", "petertestpass");
-      User expectedUser = User(
-          email: "petertest@gmail.com",
-          name: "petertest",
-          phoneNumber: "",
-          id: 2);
-      expect(loggedInUser, expectedUser);
+      expect(loggedInUser, isInstanceOf<User>());
     });
 
     test('User logged in unsuccessfully', () async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await Login("whatever@whatever.com", "password12whatever");
-      bool? loggedInUser = prefs.getBool("isLoggedin");
-      expect(loggedInUser, null);
+      User loggedInUser =
+          await Login("whatever@whatever.com", "password12whatever");
+
+      expect(loggedInUser, isInstanceOf<User>());
     });
   });
 
   group('Register', () {
     test('User registered successfully', () async {
       bool isRegistered = await Register(
-          "petertest22@gmail.com", "petertest22pass", "petertest22");
+          "petertest44@gmail.com", "petertest44pass", "petertest44");
       expect(isRegistered, true);
     });
 
     test('User registered unsuccessfully', () async {
       bool isRegistered = await Register(
-          "petertest22@gmail.com", "petertest22pass", "petertest22");
+          "petertest44@gmail.com", "petertest44pass", "petertest44");
       expect(isRegistered, false);
     });
   });

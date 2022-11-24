@@ -6,12 +6,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:qa/utils/appsettings.dart';
 
-Register(String email, String password,String name) async {
+Register(String email, String password, String name) async {
   try {
-    
     var dio = DioModel().getDio();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     Response result = await dio.post(RegisterUrl, queryParameters: {
+      "Name": name,
       "Email": email,
       "Password": password,
     });
