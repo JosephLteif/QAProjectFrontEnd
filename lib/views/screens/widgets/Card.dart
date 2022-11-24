@@ -20,7 +20,6 @@ class _CardWidgetState extends State<CardWidget> {
       width: 160,
       child: Card(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        color: const Color(0xFF343434),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

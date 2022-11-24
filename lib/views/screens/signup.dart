@@ -75,16 +75,8 @@ class _SignUpState extends State<SignUp> {
                         cursorHeight: 20,
                         autofocus: false,
                         decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Color(0xFF343434),
-                          prefixIcon: Icon(Icons.person, color: Colors.grey),
-                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.person),
                           labelText: 'Name',
-                          labelStyle: TextStyle(color: Colors.grey),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1, color: Colors.grey),
-                          ),
                         ),
                       ),
                     ),
@@ -104,16 +96,8 @@ class _SignUpState extends State<SignUp> {
                             cursorHeight: 20,
                             autofocus: false,
                             decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Color(0xFF343434),
                               prefixIcon: Icon(Icons.email, color: Colors.grey),
-                              border: InputBorder.none,
                               labelText: 'Email',
-                              labelStyle: TextStyle(color: Colors.grey),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 1, color: Colors.grey),
-                              ),
                             ),
                           ),
                           SizedBox(
@@ -127,17 +111,8 @@ class _SignUpState extends State<SignUp> {
                             autofocus: false,
                             obscureText: true,
                             decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Color(0xFF343434),
-                              prefixIcon:
-                                  Icon(Icons.password, color: Colors.grey),
-                              border: InputBorder.none,
+                              prefixIcon: Icon(Icons.password),
                               labelText: 'Password',
-                              labelStyle: TextStyle(color: Colors.grey),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(width: 1, color: Colors.grey),
-                              ),
                             ),
                           ),
                           SizedBox(

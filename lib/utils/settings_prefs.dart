@@ -6,6 +6,14 @@ import 'material_color.dart';
 class SettingsNotifier extends ChangeNotifier {
   bool isDarkMode = false;
   final darkTheme = ThemeData(
+    inputDecorationTheme: const InputDecorationTheme(
+        filled: true,
+        fillColor: const Color(0xFF343434),
+        iconColor: Colors.grey,
+        labelStyle: TextStyle(
+          color: Colors.grey,
+        )),
+    cardColor: Color(0xFF343434),
     primarySwatch: Colors.grey,
     primaryColor: Colors.black,
     brightness: Brightness.dark,
@@ -25,6 +33,20 @@ class SettingsNotifier extends ChangeNotifier {
   );
 
   final lightTheme = ThemeData(
+      inputDecorationTheme: const InputDecorationTheme(
+          counterStyle: TextStyle(color: Colors.black),
+          border: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.black)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(width: 1, color: Colors.black)),
+          suffixIconColor: Colors.black,
+          filled: true,
+          fillColor: Colors.transparent,
+          iconColor: Colors.black,
+          labelStyle: TextStyle(
+            color: Colors.black,
+          )),
+      cardColor: Colors.grey,
       primaryColorLight: Colors.white,
       primarySwatch: generateMaterialColor(Colors.white),
       primaryColor: const Color.fromRGBO(95, 0, 196, 40),

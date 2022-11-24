@@ -67,15 +67,8 @@ class _SignIn extends State<SignIn> {
                       cursorHeight: 20,
                       autofocus: false,
                       decoration: const InputDecoration(
-                        filled: true,
-                        fillColor: Color(0xFF343434),
-                        prefixIcon: Icon(Icons.email, color: Colors.grey),
-                        border: InputBorder.none,
+                        prefixIcon: Icon(Icons.email),
                         labelText: 'Email',
-                        labelStyle: TextStyle(color: Colors.grey),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: Colors.grey),
-                        ),
                       ),
                     ),
                     const SizedBox(
@@ -85,17 +78,8 @@ class _SignIn extends State<SignIn> {
                       key: const Key("Password"),
                       controller: passwordController,
                       decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color(0xFF343434),
                           labelText: 'Password',
-                          border: InputBorder.none,
-                          prefixIcon:
-                              const Icon(Icons.lock, color: Colors.grey),
-                          labelStyle: const TextStyle(color: Colors.grey),
-                          focusedBorder: const OutlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1, color: Colors.grey),
-                          ),
+                          prefixIcon: const Icon(Icons.lock),
                           suffixIcon: IconButton(
                             icon: _obscureText ? firstIcon : secondIcon,
                             onPressed: () {
