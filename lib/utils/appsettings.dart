@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 /*endpoints*/
-const LoginUrl = "https://192.168.52.60:5003/api/FirebaseAuthentication/Login";
+const LoginUrl = "https://192.168.1.4:5003/api/FirebaseAuthentication/Login";
 const RegisterUrl =
     "https://192.168.52.60:5003/api/FirebaseAuthentication/Register";
 // const LoginUrl="https://jsonplaceholder.typicode.com/todos/1";
