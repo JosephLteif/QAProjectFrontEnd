@@ -24,9 +24,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  final List<String> entries = <String>['A', 'B', 'C'];
-  final List<int> colorCodes = <int>[600, 500, 100];
-
   @override
   Widget build(BuildContext context) {
     List<Course> courses = DataHelper.generateClasses(10);
@@ -89,15 +86,23 @@ class _HomePageState extends State<HomePage>
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemCount: 6,
-                        itemBuilder: (context, index) => Container(
-                          margin:
-                              EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-                          padding: EdgeInsets.symmetric(horizontal: 30),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.deepPurple,
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: (){
+                            Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => ViewAllPage(courses: courses,title: "Java")))
+                            .then((value) => setState(() {}));
+                          },
+                          child: Container(
+                            margin:
+                                EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.deepPurple,
+                            ),
+                            child: Center(child: Text("Java")),
+                            
                           ),
-                          child: Center(child: Text("Java")),
                         ),
                       ),
                     ),

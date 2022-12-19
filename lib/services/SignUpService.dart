@@ -14,6 +14,7 @@ Register(String email, String password,String name) async {
     Response result = await dio.post(RegisterUrl, queryParameters: {
       "Email": email,
       "Password": password,
+      "Name": name
     });
 
     if (result.statusCode == 200) {

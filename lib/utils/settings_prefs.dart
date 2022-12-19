@@ -6,7 +6,13 @@ import 'material_color.dart';
 class SettingsNotifier extends ChangeNotifier {
   bool isDarkMode = false;
   final darkTheme = ThemeData(
+    textSelectionTheme: TextSelectionThemeData(
+            selectionColor:  Colors.deepPurple.withOpacity(.5),
+            cursorColor:  Colors.deepPurple.withOpacity(.6),
+            selectionHandleColor:  Colors.deepPurple.withOpacity(1),
+    ),
     inputDecorationTheme: const InputDecorationTheme(
+      
         filled: true,
         fillColor: const Color(0xFF343434),
         iconColor: Colors.grey,
@@ -33,6 +39,11 @@ class SettingsNotifier extends ChangeNotifier {
   );
 
   final lightTheme = ThemeData(
+      textSelectionTheme: TextSelectionThemeData(
+            selectionColor:  Colors.deepPurple.withOpacity(.5),
+            cursorColor:  Colors.deepPurple.withOpacity(.6),
+            selectionHandleColor:  Colors.deepPurple.withOpacity(1),
+          ),
       inputDecorationTheme: const InputDecorationTheme(
           counterStyle: TextStyle(color: Colors.black),
           border: OutlineInputBorder(
@@ -69,7 +80,7 @@ class SettingsNotifier extends ChangeNotifier {
     StorageManager.readData('themeMode').then((value) {
       var themeMode = value ?? 'light';
       if (themeMode == 'light') {
-        _themeData = lightTheme;
+        _themeData = darkTheme;
         isDarkMode = false;
         StorageManager.saveData('themeMode', 'light');
       } else {

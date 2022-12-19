@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qa/views/screens/CourseDetails.dart';
 
 import '../../../models/course.dart';
 
@@ -25,7 +26,12 @@ class CardTile extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () {},
+      onTap: () {
+          Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ((context) => CourseDetails(course: course))));
+      },
       title: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Text(course.name.toString()),

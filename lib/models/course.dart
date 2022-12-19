@@ -7,5 +7,6 @@ class Course{
   String? creationDate;
   int? length;
   int? passing;
-  Course(int this.id, String this.name, String this.description,this.image,double this.price, String this.creationDate, int this.length, int this.passing);
+  int? students;
+  Course(int this.id, String this.name, String this.description,this.image,double this.price, String this.creationDate, int this.length, int this.passing, int this.students);
 }
